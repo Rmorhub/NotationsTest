@@ -1,0 +1,25 @@
+.action {
+  &__form {
+    width: 400px;
+    margin: auto;
+    &_name {
+      margin: 0;
+      font-size: 26px;
+    }
+    &_title {
+      margin: 20px 0 5px 0;
+      &-input {
+        height: 30px;
+        width: 400px;
+      }
+    }
+
+    &_description {
+      margin: 20px 0 5px 0;
+      &-input {
+        width: 400px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

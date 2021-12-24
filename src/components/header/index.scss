@@ -1,0 +1,10 @@
+.header {
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(214, 214, 214);
+    border-bottom: 1px solid #000;
+    height: 80px;
+  }
+}
