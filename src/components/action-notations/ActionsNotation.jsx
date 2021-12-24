@@ -76,12 +76,12 @@ const ActionsNotation = ({ onLoad, editObj }) => {
               required
             />
           </label>
-          <button>{btnText}</button>
+          <button className="action__form_btn">{btnText}</button>
         </form>
       </section>
       {modalOpen && (
         <ModalWindow open={modalOpen} setOpen={setModalOpen} title={title} action={actionHandler}>
-          {btnText.toLowerCase()}
+          {btnText}
         </ModalWindow>
       )}
     </>

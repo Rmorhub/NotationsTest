@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ModalWindow from '../modal/ModalWindow';
 import { deleteNotation } from '../../API/gateWay';
 
@@ -18,7 +14,7 @@ const Notation = ({ notation, onLoad, setEditObj }) => {
   };
 
   const arrowBtnStyle = {
-    transform: active ? 'rotate(180deg)' : 'rotate(0deg)',
+    transform: active ? 'rotate(-180deg)' : 'rotate(-0deg)',
     transition: 'transform 150ms ease',
   };
 
@@ -34,32 +30,32 @@ const Notation = ({ notation, onLoad, setEditObj }) => {
 
   return (
     <>
+      {modalOpen && (
+        <ModalWindow open={modalOpen} setOpen={setModalOpen} title={title} action={deleteHandler}>
+          Delete
+        </ModalWindow>
+      )}
       <article className="notation">
         <section className="notation__section">
           <h3 className="notation__title">{title}</h3>
           <nav className="notation__nav">
-            <IconButton onClick={() => setModalOpen(true)}>
-              <DeleteIcon />
-            </IconButton>
-            <Link to="/edit-notation" className="link__btn" onClick={() => setEditObj(notation)}>
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </Link>
-            <IconButton onClick={rollDownHandler}>
-              <KeyboardArrowDownIcon style={arrowBtnStyle} />
-            </IconButton>
+            <button className="notation__btn" onClick={() => setModalOpen(true)}>
+              <i className="fas fa-trash" />
+            </button>
+            <button className="notation__btn" onClick={() => setEditObj(notation)}>
+              <Link to="/edit-notation" className="link__btn">
+                <i className="fas fa-edit" />
+              </Link>
+            </button>
+            <button className="notation__btn" onClick={rollDownHandler}>
+              <i className="fas fa-chevron-up" style={arrowBtnStyle} />
+            </button>
           </nav>
         </section>
         <p className="notation__description" style={desctiptionStyle}>
           {description}
         </p>
       </article>
-      {modalOpen && (
-        <ModalWindow open={modalOpen} setOpen={setModalOpen} title={title} action={deleteHandler}>
-          delete
-        </ModalWindow>
-      )}
     </>
   );
 };
