@@ -6,6 +6,7 @@ import ModalWindow from '../modal/ModalWindow';
 
 const ActionsNotation = ({ onLoad, editObj }) => {
   const { pathname } = useLocation();
+  
   const createPath = '/create-notation';
   const direction = pathname === createPath ? 'Create notation:' : 'Edit Notation:';
   const btnText = pathname === createPath ? 'Create' : 'Edit';
