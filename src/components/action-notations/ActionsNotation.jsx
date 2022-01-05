@@ -5,6 +5,7 @@ import { createNotation, updateNotation } from '../../API/gateWay';
 import ModalWindow from '../modal/ModalWindow';
 
 const ActionsNotation = ({ onLoad, editObj }) => {
+  console.log(editObj);
   const { pathname } = useLocation();
 
   const createPath = '/create-notation';
@@ -17,6 +18,7 @@ const ActionsNotation = ({ onLoad, editObj }) => {
   const [title, setTitle] = useState(titleText);
   const [description, setDescription] = useState(descriptionText);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const titleChangeHandler = event => {
     setTitle(event.target.value);
@@ -34,7 +36,7 @@ const ActionsNotation = ({ onLoad, editObj }) => {
     const notationObj = {
       title,
       description,
-      date: new Date(),
+      date: isChecked ? editObj.date : new Date(),
     };
     if (pathname === createPath) {
       createNotation(notationObj).then(() => onLoad());
@@ -49,6 +51,13 @@ const ActionsNotation = ({ onLoad, editObj }) => {
       setDescription('');
     }
   }, [pathname]);
+
+  const checkbox = pathname !== createPath && (
+    <label>
+      <input type="checkbox" onClick={() => setIsChecked(!isChecked)} />
+      Edit without change time
+    </label>
+  );
 
   return (
     <>
@@ -78,6 +87,8 @@ const ActionsNotation = ({ onLoad, editObj }) => {
               required
             />
           </label>
+          {checkbox}
+          <br />
           <button className="action__form_btn">{btnText}</button>
         </form>
       </section>
