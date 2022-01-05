@@ -8,8 +8,15 @@ import { getNotations } from '../../API/gateWay';
 const Main = () => {
   const [notations, setNotations] = useState([]);
   const [editObj, setEditObj] = useState({});
+  const [isLatest, setIsLatest] = useState(true);
+
+  const btnShowText = isLatest ? 'Show later first' : 'Show recent first';
 
   const onLoad = () => getNotations().then(result => setNotations(result));
+
+  const handleSort = () => {
+    setIsLatest(!isLatest);
+  };
 
   useEffect(() => {
     onLoad();
@@ -19,10 +26,16 @@ const Main = () => {
     <main className="main">
       <section className="main__section">
         <Route exact path="/">
-          <button className='main__sort-btn' onClick={() => setNotations(prev => prev.slice().reverse())}>Sort</button>
+          {notations.length >= 2 && (
+            <button className="main__sort-btn" onClick={handleSort}>
+              {btnShowText}
+            </button>
+          )}
           {notations
             .slice()
-            .reverse()
+            .sort((a, b) =>
+              !isLatest ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date),
+            )
             .map(notation => (
               <Notation
                 key={notation.id}
