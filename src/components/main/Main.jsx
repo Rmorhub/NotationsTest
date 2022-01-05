@@ -15,18 +15,23 @@ const Main = () => {
     onLoad();
   }, []);
 
+  console.log(notations);
+
   return (
     <main className="main">
       <section className="main__section">
         <Route exact path="/">
-          {notations.map(notation => (
-            <Notation
-              key={notation.id}
-              notation={notation}
-              onLoad={onLoad}
-              setEditObj={setEditObj}
-            />
-          ))}
+          {notations
+            .slice()
+            .reverse()
+            .map(notation => (
+              <Notation
+                key={notation.id}
+                notation={notation}
+                onLoad={onLoad}
+                setEditObj={setEditObj}
+              />
+            ))}
         </Route>
         <Route exact path="/:direction">
           <ActionsNotation onLoad={onLoad} editObj={editObj} />
