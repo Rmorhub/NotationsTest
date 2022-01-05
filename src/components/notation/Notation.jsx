@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+
 import './index.scss';
 import ModalWindow from '../modal/ModalWindow';
 import { deleteNotation } from '../../API/gateWay';
@@ -55,6 +57,9 @@ const Notation = ({ notation, onLoad, setEditObj }) => {
         <p className="notation__description" style={desctiptionStyle}>
           {description}
         </p>
+        <span className="notation__date" style={desctiptionStyle}>
+          {moment(notation.date).format('MMMM Do YYYY, h:mm:ss a')}
+        </span>
       </article>
     </>
   );
