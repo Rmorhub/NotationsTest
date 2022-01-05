@@ -15,12 +15,11 @@ const Main = () => {
     onLoad();
   }, []);
 
-  console.log(notations);
-
   return (
     <main className="main">
       <section className="main__section">
         <Route exact path="/">
+          <button className='main__sort-btn' onClick={() => setNotations(prev => prev.slice().reverse())}>Sort</button>
           {notations
             .slice()
             .reverse()
